@@ -4,15 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/padding_global"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <ImageView
+      android:id="@+id/iv_logo"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/size_logo_h"
+       android:src="@drawable/logo_7mw"
+       app:layout_constraintTop_toTopOf="parent"
+       android:contentDescription="@string/cd_app_logo" />
+
+   <FrameLayout
+       android:id="@+id/fl_button_wrapper"
+       android:layout_width="150dp"
+       android:layout_height="150dp" 
+       android:layout_marginTop="@dimen/margin_elements"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:background="@drawable/item_circular_accent_border_ripple_background">
+         
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/label_start"
+          android:textAllCaps="true"
+          android:layout_gravity="center"
+          android:textColor="@color/primary"
+          android:textSize="@dimen/size_button_text"
+          android:textStyle="bold" />
+
+   </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
