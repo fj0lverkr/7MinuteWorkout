@@ -3,4 +3,6 @@
     <string name="cd_app_logo">App logo</string>
     <string name="label_start">start</string>
     <string name="label_exercise_slogan">get ready for</string>
+    <string name="label_exercise_name">doing exercise %1$s</string>
+    <string name="label_rest_name">get ready for %1$s</string>
 </resources>

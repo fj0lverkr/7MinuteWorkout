@@ -8,11 +8,9 @@ import com.nilsnahooy.a7minuteworkout.databinding.ActivityExerciseBinding
 
 class ExerciseActivity : AppCompatActivity() {
 
-    private val timeToRest = 10000L
-    private val timeToRestSeconds = timeToRest/1000
     private var b:ActivityExerciseBinding? = null
-    private var restTimer: CountDownTimer? = null
-    private var restProgress = -1
+    private var activityTimer: CountDownTimer? = null
+    private var activityProgress = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,39 +29,52 @@ class ExerciseActivity : AppCompatActivity() {
     }
 
     private fun setupRestView() {
-        if(restTimer != null) {
-            restTimer?.cancel()
-            restProgress = -1
+        if(activityTimer != null) {
+            activityTimer?.cancel()
+            activityProgress = -1
         }
-        setRestProgressBar()
+        setProgressBar("demo", 10000, true)
     }
 
-    private fun setRestProgressBar() {
-        b?.pbTimer?.progress = restProgress
-        restTimer = object : CountDownTimer(timeToRest, 1000){
+
+    private fun setProgressBar(activityName: String, timeMs: Long, isRest: Boolean) {
+        b?.tvSlogan?.text = if(isRest){
+            getString(R.string.label_rest_name, activityName)
+        } else {
+            getString(R.string.label_exercise_name, activityName)
+        }
+        var timeToExercise: Int = (timeMs/1000).toInt()
+        b?.pbTimer?.max = timeToExercise
+        b?.pbTimer?.progress = activityProgress
+        activityTimer = object : CountDownTimer(timeMs, 1000){
             override fun onTick(p0: Long) {
-                restProgress ++
-                b?.pbTimer?.progress = timeToRestSeconds.toInt()-restProgress
-                b?.tvTimer?.text = "${timeToRestSeconds-restProgress}"
+                activityProgress ++
+                b?.pbTimer?.progress = timeToExercise-activityProgress
+                b?.tvTimer?.text = "${timeToExercise-activityProgress}"
             }
 
-            override fun onFinish() {
-                restProgress ++
-                b?.pbTimer?.progress = timeToRestSeconds.toInt()-restProgress
-                b?.tvTimer?.text = "${timeToRestSeconds-restProgress}"
-                Toast.makeText(this@ExerciseActivity, "Now we start the exercise!",
-                    Toast.LENGTH_LONG).show()
-                restProgress = -1
-                restTimer = null
+            override fun onFinish(){
+                timeToExercise = (timeMs/1000).toInt()
+                activityProgress ++
+                b?.pbTimer?.progress = timeToExercise-activityProgress
+                b?.tvTimer?.text = "${timeToExercise-activityProgress}"
+                activityProgress = -1
+                activityTimer = null
+                if(isRest){
+                    setProgressBar("demo", 30000, false)
+                } else {
+                    Toast.makeText(this@ExerciseActivity, "Done",
+                        Toast.LENGTH_LONG).show()
+                }
             }
         }.start()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if(restTimer != null) {
-            restTimer?.cancel()
-            restProgress = -1
+        if(activityTimer != null) {
+            activityTimer?.cancel()
+            activityProgress = -1
         }
         b = null
     }
