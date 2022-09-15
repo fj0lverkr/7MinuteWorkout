@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="padding_global">5dp</dimen>
+    <dimen name="padding_global">10dp</dimen>
     <dimen name="size_button_text">22sp</dimen>
     <dimen name="margin_elements">10dp</dimen>
     <dimen name="size_logo_h">220dp</dimen>

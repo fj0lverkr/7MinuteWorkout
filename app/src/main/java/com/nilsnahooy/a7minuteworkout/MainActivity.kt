@@ -11,9 +11,9 @@ package com.nilsnahooy.a7minuteworkout
         - make sure to set the binding back to null in onDestroy()
      */
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(b?.root)
 
         b?.flButtonWrapper?.setOnClickListener {
-
+            val intent = Intent(this, ExerciseActivity::class.java)
+            startActivity(intent)
         }
     }
 

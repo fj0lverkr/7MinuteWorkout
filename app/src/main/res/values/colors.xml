@@ -13,4 +13,5 @@
     <color name="secondary_variant">#FF008BDE</color>
     <color name="accent">#FF202046</color>
     <color name="ripple_grey">#FFC4C4C4</color>
+    <color name="toolbar_color_control_normal">#FF000000</color>
 </resources>
