@@ -4,4 +4,7 @@
     <dimen name="size_button_text">22sp</dimen>
     <dimen name="margin_elements">10dp</dimen>
     <dimen name="size_logo_h">220dp</dimen>
+    <dimen name="timer_wrapper_w_h">100dp</dimen>
+    <dimen name="timer_inner_w_h">60dp</dimen>
+    <dimen name="timer_text_size">25sp</dimen>
 </resources>

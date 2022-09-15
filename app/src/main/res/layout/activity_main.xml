@@ -35,7 +35,6 @@
           android:textColor="@color/primary"
           android:textSize="@dimen/size_button_text"
           android:textStyle="bold" />
-
    </FrameLayout>
 
 

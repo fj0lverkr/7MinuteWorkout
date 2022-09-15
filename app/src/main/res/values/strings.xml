@@ -2,4 +2,5 @@
     <string name="app_name">7MinuteWorkout</string>
     <string name="cd_app_logo">App logo</string>
     <string name="label_start">start</string>
+    <string name="label_exercise_slogan">get ready for</string>
 </resources>
