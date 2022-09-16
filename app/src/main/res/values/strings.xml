@@ -5,4 +5,16 @@
     <string name="label_exercise_slogan">get ready for</string>
     <string name="label_exercise_name">doing exercise %1$s</string>
     <string name="label_rest_name">get ready for %1$s</string>
+    <string name="ex_abdominal_crunch">abdominal crunch</string>
+    <string name="ex_high_knees_running_in_place">high knees running in place</string>
+    <string name="ex_jumping_jacks">jumping jacks</string>
+    <string name="ex_lunge">lunge</string>
+    <string name="ex_plank">plank</string>
+    <string name="ex_push_up">push-up</string>
+    <string name="ex_push_up_rotation">push-up and rotation</string>
+    <string name="ex_side_plank">side plank</string>
+    <string name="ex_squat">squat</string>
+    <string name="ex_step_up_onto_chair">step up onto chair</string>
+    <string name="ex_triceps_dip_on_chair">triceps dip on chair</string>
+    <string name="ex_wall_sit">wall sit</string>
 </resources>
