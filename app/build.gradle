@@ -32,6 +32,7 @@ android {
     buildFeatures{
         viewBinding true
     }
+    namespace 'com.nilsnahooy.a7minuteworkout'
 }
 
 dependencies {
