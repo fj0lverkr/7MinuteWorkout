@@ -17,4 +17,5 @@
     <string name="ex_step_up_onto_chair">step up onto chair</string>
     <string name="ex_triceps_dip_on_chair">triceps dip on chair</string>
     <string name="ex_wall_sit">wall sit</string>
+    <string name="ex_done">all done!</string>
 </resources>

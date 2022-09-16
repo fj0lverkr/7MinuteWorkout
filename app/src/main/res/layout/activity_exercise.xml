@@ -1,68 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ExerciseActivity">
+    tools:context=".ExerciseActivity"
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_exercise"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:theme="@style/Theme.7MinuteWorkout.Toolbar"
         android:background="@color/primary"
-        app:titleTextColor="@color/accent"
+        android:theme="@style/Theme.7MinuteWorkout.Toolbar"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:titleTextColor="@color/accent" />
+
+    <ImageView
+        android:id="@+id/iv_exercise_illustration"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/illustration_h"
+        android:layout_marginTop="@dimen/illustration_margin_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tb_exercise"
+        tools:src="@drawable/ic_abdominal_crunch" />
+
     <TextView
+        android:id="@+id/tv_slogan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_slogan"
-        app:layout_constraintTop_toBottomOf="@+id/tb_exercise"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_horizontal"
         android:text="@string/label_exercise_slogan"
         android:textAllCaps="true"
-        android:textSize="@dimen/size_button_text"
         android:textColor="@color/accent"
-        android:textStyle="bold" />
+        android:textSize="@dimen/size_button_text"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="@dimen/padding_global"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_exercise_illustration" />
+
     <FrameLayout
         android:id="@+id/fl_timer_wrapper"
         android:layout_width="@dimen/timer_wrapper_w_h"
         android:layout_height="@dimen/timer_wrapper_w_h"
         android:layout_marginTop="@dimen/padding_global"
-        app:layout_constraintTop_toBottomOf="@+id/tv_slogan"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/padding_global"
+        android:background="@drawable/item_circular_accent_border"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/item_circular_accent_border">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_slogan">
+
         <ProgressBar
             android:id="@+id/pb_timer"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="@dimen/timer_wrapper_w_h"
             android:layout_height="@dimen/timer_wrapper_w_h"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:indeterminate="false"
-            android:background="@drawable/circular_progress_bar_grey"
-            android:progressDrawable="@drawable/circular_progress_bar"
             android:layout_gravity="center"
+            android:background="@drawable/circular_progress_bar_grey"
+            android:indeterminate="false"
             android:max="10"
             android:progress="100"
+            android:progressDrawable="@drawable/circular_progress_bar"
             android:rotation="-90" />
+
         <LinearLayout
             android:layout_width="@dimen/timer_inner_w_h"
             android:layout_height="@dimen/timer_inner_w_h"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:background="@drawable/item_circular_accent_background">
+            android:background="@drawable/item_circular_accent_background"
+            android:gravity="center">
+
             <TextView
                 android:id="@+id/tv_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:textColor="@color/primary"
                 android:textSize="@dimen/timer_text_size"
-                tools:text="10"/>
+                android:textStyle="bold"
+                tools:text="10" />
         </LinearLayout>
 
     </FrameLayout>

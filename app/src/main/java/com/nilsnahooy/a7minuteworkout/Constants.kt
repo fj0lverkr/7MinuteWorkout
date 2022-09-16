@@ -6,17 +6,17 @@ object Constants {
 
         exerciseList.add(
             ExerciseModel(1, AppForContext.res.getString(R.string.ex_abdominal_crunch),
-                30000, R.drawable.ic_abdominal_crunch, isCompleted = false,
+                45000, R.drawable.ic_abdominal_crunch, isCompleted = false,
                 isSelected = false))
 
         exerciseList.add(
             ExerciseModel(2, AppForContext.res.getString(
-                R.string.ex_high_knees_running_in_place), 30000,
+                R.string.ex_high_knees_running_in_place), 45000,
                 R.drawable.ic_high_knees_running_in_place, isCompleted = false, isSelected = false))
 
         exerciseList.add(
             ExerciseModel(3, AppForContext.res.getString(R.string.ex_jumping_jacks),
-                30000, R.drawable.ic_jumping_jacks, isCompleted = false,
+                45000, R.drawable.ic_jumping_jacks, isCompleted = false,
                 isSelected = false))
 
         exerciseList.add(
@@ -24,16 +24,16 @@ object Constants {
                 R.drawable.ic_lunge, isCompleted = false, isSelected = false))
 
         exerciseList.add(
-            ExerciseModel(5, AppForContext.res.getString(R.string.ex_plank), 30000,
+            ExerciseModel(5, AppForContext.res.getString(R.string.ex_plank), 20000,
                 R.drawable.ic_plank, isCompleted = false, isSelected = false))
 
         exerciseList.add(
             ExerciseModel(6, AppForContext.res.getString(R.string.ex_push_up),
-                30000, R.drawable.ic_push_up, isCompleted = false, isSelected = false))
+                45000, R.drawable.ic_push_up, isCompleted = false, isSelected = false))
 
         exerciseList.add(
             ExerciseModel(7, AppForContext.res.getString(R.string.ex_push_up_rotation),
-                30000, R.drawable.ic_push_up_and_rotation, isCompleted = false,
+                40000, R.drawable.ic_push_up_and_rotation, isCompleted = false,
                 isSelected = false))
 
         exerciseList.add(

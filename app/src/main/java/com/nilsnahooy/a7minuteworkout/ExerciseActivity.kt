@@ -3,7 +3,7 @@ package com.nilsnahooy.a7minuteworkout
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityExerciseBinding
 
 class ExerciseActivity : AppCompatActivity() {
@@ -11,6 +11,8 @@ class ExerciseActivity : AppCompatActivity() {
     private var b:ActivityExerciseBinding? = null
     private var activityTimer: CountDownTimer? = null
     private var activityProgress = -1
+
+    private val exerciseList = Constants.defaultExerciseList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,16 +35,27 @@ class ExerciseActivity : AppCompatActivity() {
             activityTimer?.cancel()
             activityProgress = -1
         }
-        setProgressBar("demo", 10000, true)
+        startExercise(0, true)
     }
 
 
-    private fun setProgressBar(activityName: String, timeMs: Long, isRest: Boolean) {
+    private fun startExercise(activityIndex: Int, isRest: Boolean) {
+        val activity = exerciseList[activityIndex]
+        val activityName = activity.getName()
+        val activityImage = activity.getImageRes()
+        val timeMs = if (isRest) {
+            10000
+        }else {
+            activity.getDuration()
+        }
+
         b?.tvSlogan?.text = if(isRest){
             getString(R.string.label_rest_name, activityName)
         } else {
             getString(R.string.label_exercise_name, activityName)
         }
+        b?.ivExerciseIllustration?.setImageDrawable(AppCompatResources.getDrawable(this,
+            activityImage))
         var timeToExercise: Int = (timeMs/1000).toInt()
         b?.pbTimer?.max = timeToExercise
         b?.pbTimer?.progress = activityProgress
@@ -60,11 +73,18 @@ class ExerciseActivity : AppCompatActivity() {
                 b?.tvTimer?.text = "${timeToExercise-activityProgress}"
                 activityProgress = -1
                 activityTimer = null
-                if(isRest){
-                    setProgressBar("demo", 30000, false)
+
+                if (isRest) {
+                    startExercise(activityIndex, false)
                 } else {
-                    Toast.makeText(this@ExerciseActivity, "Done",
-                        Toast.LENGTH_LONG).show()
+                    if(activityIndex < exerciseList.size-1) {
+                        startExercise(activityIndex + 1, true)
+                    } else {
+                        b?.ivExerciseIllustration?.setImageDrawable(AppCompatResources.getDrawable(
+                            this@ExerciseActivity, R.drawable.ic_done))
+                        b?.tvSlogan?.text = getString(R.string.ex_done)
+                        b?.tvTimer?.text = ""
+                    }
                 }
             }
         }.start()
