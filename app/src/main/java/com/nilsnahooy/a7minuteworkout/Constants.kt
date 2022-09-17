@@ -2,7 +2,7 @@ package com.nilsnahooy.a7minuteworkout
 
 object Constants {
     fun defaultExerciseList(): ArrayList<ExerciseModel>{
-        val exerciseList = ArrayList<ExerciseModel>()
+        var exerciseList = ArrayList<ExerciseModel>()
 
         exerciseList.add(
             ExerciseModel(1, AppForContext.res.getString(R.string.ex_abdominal_crunch),
@@ -58,6 +58,12 @@ object Constants {
             ExerciseModel(12, AppForContext.res.getString(R.string.ex_wall_sit),
                 30000, R.drawable.ic_wall_sit, isCompleted = false, isSelected = false))
 
-        return exerciseList.shuffled() as ArrayList<ExerciseModel>
+         exerciseList = exerciseList.shuffled() as ArrayList<ExerciseModel>
+
+        for (e in exerciseList) {
+            e.setId(exerciseList.indexOf(e)+1)
+        }
+
+        return exerciseList
     }
 }

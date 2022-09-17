@@ -9,4 +9,8 @@
     <dimen name="timer_text_size">25sp</dimen>
     <dimen name="illustration_h">300dp</dimen>
     <dimen name="illustration_margin_top">76dp</dimen>
+    <dimen name="item_exercise_status_w_h">25dp</dimen>
+    <dimen name="margin_1">1dp</dimen>
+    <dimen name="padding_3">3dp</dimen>
+    <dimen name="item_status_text">14sp</dimen>
 </resources>

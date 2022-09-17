@@ -1,16 +1,5 @@
 package com.nilsnahooy.a7minuteworkout
 
-/* NOTE ON USING VIEWBINDING
-        - Faster, more efficient during compilation, safer, more concise in code.
-        - becomes available after setting
-                buildFeatures{
-                    viewBinding true
-                }
-          in the android section of build.gradle
-        - for usage, see code below (var b?)
-        - make sure to set the binding back to null in onDestroy()
-     */
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

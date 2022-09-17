@@ -7,6 +7,7 @@ import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityExerciseBinding
 import java.util.*
 
@@ -18,6 +19,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var tts:TextToSpeech? = null
     private var startStopPlayer: MediaPlayer? = null
     private var tickPlayer: MediaPlayer? = null
+    private var exerciseAdapter: ExerciseStatusAdapter? = null
 
     private val exerciseList = Constants.defaultExerciseList()
 
@@ -32,7 +34,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         b?.tbExercise?.setNavigationOnClickListener {
-            onBackPressed()
+            finish()
         }
 
         //Setup MediaPlayers
@@ -41,10 +43,19 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         startStopPlayer?.isLooping = false
         tickPlayer?.isLooping = false
 
-        //Start TTS engine
+        //Start TTS engine, this will also start the exercises
         tts = TextToSpeech(this, this)
+
+        //Init  RecyclerView for tracking exercises
+        setupExerciseStatus()
     }
 
+    private fun setupExerciseStatus() {
+        b?.rvProgress?.layoutManager = LinearLayoutManager(this,
+            LinearLayoutManager.HORIZONTAL, false)
+        exerciseAdapter = ExerciseStatusAdapter(exerciseList)
+        b?.rvProgress?.adapter = exerciseAdapter
+    }
     private fun setupRestView() {
         if(activityTimer != null) {
             activityTimer?.cancel()
@@ -53,11 +64,13 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         startExercise(0, true)
     }
 
-
     private fun startExercise(activityIndex: Int, isRest: Boolean) {
         val activity = exerciseList[activityIndex]
         val activityName = activity.getName()
         val activityImage = activity.getImageRes()
+
+        activity.setIsSelected(true)
+        b?.rvProgress?.adapter?.notifyItemChanged(activityIndex)
 
         val slogan = if(isRest){
             getString(R.string.label_rest_name, activityName)
@@ -119,6 +132,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                         b?.tvSlogan?.text = getString(R.string.ex_done)
                         b?.tvTimer?.text = ""
                     }
+                    activity.setIsSelected(false)
+                    activity.setIsCompleted(true)
+                    b?.rvProgress?.adapter?.notifyItemChanged(activityIndex)
                 }
             }
         }.start()
