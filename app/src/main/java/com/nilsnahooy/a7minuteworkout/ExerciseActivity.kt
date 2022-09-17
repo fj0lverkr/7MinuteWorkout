@@ -1,16 +1,22 @@
 package com.nilsnahooy.a7minuteworkout
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import androidx.appcompat.content.res.AppCompatResources
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityExerciseBinding
+import java.util.*
 
-class ExerciseActivity : AppCompatActivity() {
+class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private var b:ActivityExerciseBinding? = null
     private var activityTimer: CountDownTimer? = null
     private var activityProgress = -1
+    private var tts:TextToSpeech? = null
+    private var player: MediaPlayer? = null
 
     private val exerciseList = Constants.defaultExerciseList()
 
@@ -26,8 +32,7 @@ class ExerciseActivity : AppCompatActivity() {
         b?.tbExercise?.setNavigationOnClickListener {
             onBackPressed()
         }
-
-        setupRestView()
+        tts = TextToSpeech(this, this)
     }
 
     private fun setupRestView() {
@@ -49,13 +54,18 @@ class ExerciseActivity : AppCompatActivity() {
             activity.getDuration()
         }
 
-        b?.tvSlogan?.text = if(isRest){
+        val slogan = if(isRest){
             getString(R.string.label_rest_name, activityName)
         } else {
             getString(R.string.label_exercise_name, activityName)
         }
+
+        b?.tvSlogan?.text = slogan
         b?.ivExerciseIllustration?.setImageDrawable(AppCompatResources.getDrawable(this,
             activityImage))
+
+        speakOut(slogan)
+
         var timeToExercise: Int = (timeMs/1000).toInt()
         b?.pbTimer?.max = timeToExercise
         b?.pbTimer?.progress = activityProgress
@@ -90,12 +100,38 @@ class ExerciseActivity : AppCompatActivity() {
         }.start()
     }
 
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS){
+            val result = tts?.setLanguage(Locale.UK)
+            if (result == TextToSpeech.LANG_MISSING_DATA ||
+                result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "Unsupported language.")
+            }
+        }else{
+            Log.e("TTS", "Error initializing TTS.")
+        }
+        setupRestView()
+    }
+
+    private fun speakOut(text: String) {
+        if(tts != null){
+            tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+
         if(activityTimer != null) {
             activityTimer?.cancel()
             activityProgress = -1
         }
+
+        if(tts != null){
+            tts?.stop()
+            tts?.shutdown()
+        }
+
         b = null
     }
 }
