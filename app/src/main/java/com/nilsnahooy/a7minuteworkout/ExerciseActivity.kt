@@ -16,7 +16,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var activityTimer: CountDownTimer? = null
     private var activityProgress = -1
     private var tts:TextToSpeech? = null
-    private var player: MediaPlayer? = null
+    private var startStopPlayer: MediaPlayer? = null
+    private var tickPlayer: MediaPlayer? = null
 
     private val exerciseList = Constants.defaultExerciseList()
 
@@ -29,9 +30,18 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if(supportActionBar != null) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
+
         b?.tbExercise?.setNavigationOnClickListener {
             onBackPressed()
         }
+
+        //Setup MediaPlayers
+        startStopPlayer = MediaPlayer.create(applicationContext, R.raw.ex_start)
+        tickPlayer = MediaPlayer.create(applicationContext, R.raw.tick)
+        startStopPlayer?.isLooping = false
+        tickPlayer?.isLooping = false
+
+        //Start TTS engine
         tts = TextToSpeech(this, this)
     }
 
@@ -48,11 +58,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         val activity = exerciseList[activityIndex]
         val activityName = activity.getName()
         val activityImage = activity.getImageRes()
-        val timeMs = if (isRest) {
-            10000
-        }else {
-            activity.getDuration()
-        }
 
         val slogan = if(isRest){
             getString(R.string.label_rest_name, activityName)
@@ -60,11 +65,21 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             getString(R.string.label_exercise_name, activityName)
         }
 
+        val timeMs = if (isRest) {
+            10000
+        }else {
+            activity.getDuration()
+        }
+
         b?.tvSlogan?.text = slogan
         b?.ivExerciseIllustration?.setImageDrawable(AppCompatResources.getDrawable(this,
             activityImage))
 
-        speakOut(slogan)
+        if(isRest){
+            speakOut(slogan)
+        }else{
+            startStopPlayer?.start()
+        }
 
         var timeToExercise: Int = (timeMs/1000).toInt()
         b?.pbTimer?.max = timeToExercise
@@ -74,6 +89,13 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 activityProgress ++
                 b?.pbTimer?.progress = timeToExercise-activityProgress
                 b?.tvTimer?.text = "${timeToExercise-activityProgress}"
+                if(!isRest) {
+                    if (timeToExercise - activityProgress == timeToExercise / 2) {
+                        speakOut("keep going!")
+                    } else {
+                        tickPlayer?.start()
+                    }
+                }
             }
 
             override fun onFinish(){
@@ -87,6 +109,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 if (isRest) {
                     startExercise(activityIndex, false)
                 } else {
+                    if (startStopPlayer?.isPlaying == true) startStopPlayer?.stop()
+                    startStopPlayer?.start()
                     if(activityIndex < exerciseList.size-1) {
                         startExercise(activityIndex + 1, true)
                     } else {
@@ -130,6 +154,20 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if(tts != null){
             tts?.stop()
             tts?.shutdown()
+        }
+
+        if(startStopPlayer != null) {
+            if (startStopPlayer?.isPlaying == true) {
+                startStopPlayer?.stop()
+            }
+            startStopPlayer = null
+        }
+
+        if(tickPlayer != null) {
+            if (tickPlayer?.isPlaying == true) {
+                tickPlayer?.stop()
+            }
+            tickPlayer = null
         }
 
         b = null
