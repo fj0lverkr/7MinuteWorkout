@@ -1,11 +1,13 @@
 package com.nilsnahooy.a7minuteworkout
 
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityExerciseBinding
@@ -33,8 +35,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
 
+        onBackPressedDispatcher.addCallback(this,
+            object: OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+                    confirmBackNavigation()
+                }
+        })
         b?.tbExercise?.setNavigationOnClickListener {
-            finish()
+            confirmBackNavigation()
         }
 
         //Setup MediaPlayers
@@ -127,10 +135,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                     if(activityIndex < exerciseList.size-1) {
                         startExercise(activityIndex + 1, true)
                     } else {
-                        b?.ivExerciseIllustration?.setImageDrawable(AppCompatResources.getDrawable(
-                            this@ExerciseActivity, R.drawable.ic_done))
-                        b?.tvSlogan?.text = getString(R.string.ex_done)
-                        b?.tvTimer?.text = ""
+                       val intent = Intent(this@ExerciseActivity,
+                           FinishedActivity::class.java)
+                        startActivity(intent)
                     }
                     activity.setIsSelected(false)
                     activity.setIsCompleted(true)
@@ -157,6 +164,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if(tts != null){
             tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
         }
+    }
+
+    private fun confirmBackNavigation(){
+        finish()
     }
 
     override fun onDestroy() {
