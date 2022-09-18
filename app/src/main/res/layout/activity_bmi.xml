@@ -17,4 +17,39 @@
         app:titleTextColor="@color/accent"
         app:title="@string/title_bmi"/>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tb_bmi"
+        android:layout_marginTop="@dimen/margin_extra"
+        android:layout_marginHorizontal="@dimen/padding_global"
+        android:hint="@string/hint_height_in_cm"
+        app:startIconDrawable="@drawable/ic_height"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ti_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_input_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/til_input_height"
+        android:layout_marginTop="@dimen/margin_extra"
+        android:layout_marginHorizontal="@dimen/padding_global"
+        android:hint="@string/hint_weight_in_kg"
+        app:startIconDrawable="@drawable/ic_weight_kilogram"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

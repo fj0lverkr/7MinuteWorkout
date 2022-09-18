@@ -2,6 +2,7 @@ package com.nilsnahooy.a7minuteworkout
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.android.material.textfield.TextInputLayout
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityBmiBinding
 
 class BmiActivity : AppCompatActivity() {
