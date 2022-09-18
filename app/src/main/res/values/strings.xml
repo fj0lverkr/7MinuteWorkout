@@ -25,4 +25,5 @@
     <string name="confirm_back_navigation">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="label_bmi">bmi</string>
 </resources>

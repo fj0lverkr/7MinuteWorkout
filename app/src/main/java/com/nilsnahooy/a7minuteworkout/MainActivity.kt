@@ -14,8 +14,13 @@ class MainActivity : AppCompatActivity() {
         b = ActivityMainBinding.inflate(layoutInflater)
         setContentView(b?.root)
 
-        b?.flButtonWrapper?.setOnClickListener {
+        b?.flStartButtonWrapper?.setOnClickListener {
             val intent = Intent(this, ExerciseActivity::class.java)
+            startActivity(intent)
+        }
+
+        b?.flBmiButtonWrapper?.setOnClickListener {
+            val intent = Intent(this, BmiActivity::class.java)
             startActivity(intent)
         }
     }
