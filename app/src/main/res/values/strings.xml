@@ -18,4 +18,7 @@
     <string name="ex_triceps_dip_on_chair">triceps dip on chair</string>
     <string name="ex_wall_sit">wall sit</string>
     <string name="ex_done">all done!</string>
+    <string name="ex_finish">finish</string>
+    <string name="slogan_finished">You cleared all exercises.</string>
+    <string name="title_congrats">Congratulations!</string>
 </resources>

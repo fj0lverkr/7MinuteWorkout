@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FinishedActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_exercise"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/primary"
+        android:theme="@style/Theme.7MinuteWorkout.Toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/accent" />
+
+    <TextView
+        android:id="@+id/tv_congrats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_congrats"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_title"
+        android:textColor="@color/accent"
+        app:layout_constraintTop_toBottomOf="@id/tb_exercise"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/padding_global"/>
+
+    <ImageView
+        android:id="@+id/iv_done"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="@dimen/padding_global"
+        app:layout_constraintTop_toBottomOf="@id/tv_congrats"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_done" />
+
+    <TextView
+        android:id="@+id/tv_slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/slogan_finished"
+        android:textStyle="bold"
+        android:textSize="@dimen/size_button_text"
+        android:textColor="@color/accent"
+        app:layout_constraintTop_toBottomOf="@id/iv_done"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/padding_global"/>
+
+    <Button
+        android:id="@+id/btn_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ex_finish"
+        android:textSize="@dimen/size_button_text"
+        android:textStyle="bold"
+        android:textColor="@color/accent"
+        app:layout_constraintTop_toBottomOf="@id/iv_done"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/padding_global"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

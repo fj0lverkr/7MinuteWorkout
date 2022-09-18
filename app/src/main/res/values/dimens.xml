@@ -13,4 +13,5 @@
     <dimen name="margin_1">1dp</dimen>
     <dimen name="padding_3">3dp</dimen>
     <dimen name="item_status_text">14sp</dimen>
+    <dimen name="text_title">40sp</dimen>
 </resources>
