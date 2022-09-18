@@ -136,7 +136,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                         startExercise(activityIndex + 1, true)
                     } else {
                        val intent = Intent(this@ExerciseActivity,
-                           FinishedActivity::class.java)
+                           FinishedExercisesActivity::class.java)
                         startActivity(intent)
                     }
                     activity.setIsSelected(false)

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityFinishedBinding
 
-class FinishedActivity : AppCompatActivity() {
+class FinishedExercisesActivity : AppCompatActivity() {
     private var b: ActivityFinishedBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
