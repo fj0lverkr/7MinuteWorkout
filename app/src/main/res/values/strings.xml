@@ -21,4 +21,8 @@
     <string name="ex_finish">finish</string>
     <string name="slogan_finished">You cleared all exercises.</string>
     <string name="title_congrats">Congratulations!</string>
+    <string name="title_confirm_back_navigation">Are you sure?</string>
+    <string name="confirm_back_navigation">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 </resources>

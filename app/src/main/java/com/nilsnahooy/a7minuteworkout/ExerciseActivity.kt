@@ -1,5 +1,6 @@
 package com.nilsnahooy.a7minuteworkout
 
+import android.app.Dialog
 import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityExerciseBinding
+import com.nilsnahooy.a7minuteworkout.databinding.DialogCustomBackConfirmationBinding
 import java.util.*
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
@@ -167,7 +169,17 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun confirmBackNavigation(){
-        finish()
+        val confirmDialog = Dialog(this)
+        val dB = DialogCustomBackConfirmationBinding.inflate(layoutInflater)
+        confirmDialog.setContentView(dB.root)
+        confirmDialog.setCanceledOnTouchOutside(false)
+        dB.btnConfirmBackNo.setOnClickListener {
+            confirmDialog.dismiss()
+        }
+        dB.btnConfirmBackYes.setOnClickListener {
+            finish()
+        }
+        confirmDialog.show()
     }
 
     override fun onDestroy() {
