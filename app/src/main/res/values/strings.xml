@@ -26,4 +26,6 @@
     <string name="yes">yes</string>
     <string name="no">no</string>
     <string name="label_bmi">bmi</string>
+    <string name="title_bmi">Calculate your BMI</string>
+    <string name="label_calculator">calculator</string>
 </resources>

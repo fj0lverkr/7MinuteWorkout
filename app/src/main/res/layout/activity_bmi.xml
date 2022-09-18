@@ -4,6 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BmiActivity">
+    tools:context=".BmiActivity"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_bmi"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/primary"
+        android:theme="@style/Theme.7MinuteWorkout.Toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/accent"
+        app:title="@string/title_bmi"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
