@@ -30,4 +30,5 @@
     <string name="label_calculator">calculator</string>
     <string name="hint_height_in_cm">your height (cm)</string>
     <string name="hint_weight_in_kg">your weight (kg)</string>
+    <string name="title_bmi_result">Your BMI</string>
 </resources>

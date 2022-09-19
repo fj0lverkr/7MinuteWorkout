@@ -45,11 +45,64 @@
         app:startIconDrawable="@drawable/ic_weight_kilogram"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ti_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
+    <LinearLayout
+        android:id="@+id/ll_tv_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/til_input_weight"
+        app:layout_constraintBottom_toTopOf="@id/btn_calculate"
+        android:layout_marginVertical="@dimen/margin_extra"
+        android:padding="@dimen/padding_global">
+        <TextView
+            android:id="@+id/tv_result_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_bmi_result"
+            android:textSize="@dimen/bmi_text"
+            android:textColor="@color/accent"/>
+        <TextView
+            android:id="@+id/tv_result_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="25.21"
+            android:textSize="@dimen/bmi_text"
+            android:textColor="@color/accent"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_result_classification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Overweight"
+            android:textSize="@dimen/bmi_text"
+            android:textColor="@color/accent"/>
+        <TextView
+            android:id="@+id/tv_result_advice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:text="Ooops! You really need to take better care of yourself,
+             try eating healthier and working out more."
+            android:textSize="@dimen/bmi_text"
+            android:textColor="@color/accent"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_calculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_tv_wrapper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/accent"
+        android:text="@string/title_bmi"
+        android:textSize="@dimen/bmi_text"
+        android:layout_marginTop="@dimen/margin_extra"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
