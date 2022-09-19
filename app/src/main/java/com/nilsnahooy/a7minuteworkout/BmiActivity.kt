@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.children
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityBmiBinding
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 class BmiActivity : AppCompatActivity() {
     private var b : ActivityBmiBinding? = null
+    private var isMetric = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +29,7 @@ class BmiActivity : AppCompatActivity() {
         resetTextViewsVisibility(false)
 
         b?.btnCalculate?.setOnClickListener {
-            val bmiResult = calculateBmi(true)
+            val bmiResult = calculateBmi()
             b?.tvResultNumber?.text = bmiResult.getScore().toString()
             b?.tvResultClassification?.text = bmiResult.getClass()
             b?.tvResultAdvice?.text = bmiResult.getAdvice()
@@ -44,19 +47,35 @@ class BmiActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculateBmi(isMetric:Boolean):BmiModel{
-        val weight: Float = b?.tiWeight?.text.toString().toFloat()
-        val height: Float = b?.tiHeight?.text.toString().toFloat()/100
-        val score: Float =
-            if (isMetric){
-                weight/(height*height)
-            }else{
-                (weight/(height*height))*703
+    private fun calculateBmi():BmiModel{
+        val wString = b?.tiWeight?.text.toString()
+        val hString = b?.tiHeight?.text.toString()
+        if (wString.isNotEmpty() && hString.isNotEmpty()) {
+            val weight: Float = wString.toFloat()
+            val height: Float =
+                if (isMetric) {
+                    hString.toFloat() / 100 //cm to meter
+                } else {
+                    hString.toFloat() //plain old inches
+                }
+            var score: Float =
+                if (isMetric) {
+                    weight / (height * height)
+                } else {
+                    (weight / (height * height)) * 703
+                }
+            score = BigDecimal(score.toDouble()).setScale(2, RoundingMode.HALF_EVEN).toFloat()
+            return when (score) {
+                in 0F..18.49F -> BmiModel(score, BmiResult.UNDERWEIGHT)
+                in 18.5F..24.9F -> BmiModel(score, BmiResult.NORMAL)
+                in 25F..29.99F -> BmiModel(score, BmiResult.OVERWEIGHT)
+                in 30F..34.99F -> BmiModel(score, BmiResult.OBESE_I)
+                in 35F..39.99F -> BmiModel(score, BmiResult.OBESE_II)
+                in 40F..9999F -> BmiModel(score, BmiResult.OBESE_III)
+                else -> BmiModel(score, BmiResult.UNDETERMINED)
             }
-        return when(score){
-            in 0F..18.5F -> BmiModel(score, "underweight",
-                "Eat more or something")
-            else -> BmiModel(score, "invalid score", "Invalid score")
+        } else {
+            return BmiModel(-1F, BmiResult.UNDETERMINED)
         }
     }
 
