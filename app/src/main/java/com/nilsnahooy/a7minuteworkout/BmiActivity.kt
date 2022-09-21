@@ -6,6 +6,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.children
+import com.nilsnahooy.a7minuteworkout.data.BmiModel
+import com.nilsnahooy.a7minuteworkout.data.BmiResult
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityBmiBinding
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -85,7 +87,7 @@ class BmiActivity : AppCompatActivity() {
             }
     }
 
-    private fun calculateBmi():BmiModel{
+    private fun calculateBmi(): BmiModel {
         val wString = b?.tiWeight?.text.toString()
         val hString = b?.tiHeight?.text.toString()
         if (wString.isNotEmpty() && hString.isNotEmpty()) {

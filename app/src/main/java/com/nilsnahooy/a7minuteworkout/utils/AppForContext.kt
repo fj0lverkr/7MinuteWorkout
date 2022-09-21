@@ -1,4 +1,4 @@
-package com.nilsnahooy.a7minuteworkout
+package com.nilsnahooy.a7minuteworkout.utils
 
 import android.app.Application
 import android.content.res.Resources

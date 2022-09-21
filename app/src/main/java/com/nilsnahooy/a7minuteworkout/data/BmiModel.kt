@@ -1,4 +1,4 @@
-package com.nilsnahooy.a7minuteworkout
+package com.nilsnahooy.a7minuteworkout.data
 
 class BmiModel(
     private val score: Float,

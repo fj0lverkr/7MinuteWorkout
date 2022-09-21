@@ -12,8 +12,10 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nilsnahooy.a7minuteworkout.data.Constants
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityExerciseBinding
 import com.nilsnahooy.a7minuteworkout.databinding.DialogCustomBackConfirmationBinding
+import com.nilsnahooy.a7minuteworkout.utils.ExerciseStatusAdapter
 import java.util.*
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {

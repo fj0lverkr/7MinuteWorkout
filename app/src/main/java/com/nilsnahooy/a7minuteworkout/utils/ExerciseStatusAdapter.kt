@@ -1,9 +1,11 @@
-package com.nilsnahooy.a7minuteworkout
+package com.nilsnahooy.a7minuteworkout.utils
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
+import com.nilsnahooy.a7minuteworkout.R
+import com.nilsnahooy.a7minuteworkout.data.ExerciseModel
 import com.nilsnahooy.a7minuteworkout.databinding.ItemExerciseStatusBinding
 
 class ExerciseStatusAdapter(private val exerciseList: ArrayList<ExerciseModel>):
@@ -23,7 +25,7 @@ class ExerciseStatusAdapter(private val exerciseList: ArrayList<ExerciseModel>):
         val c = holder.itemView.context
         val model: ExerciseModel = exerciseList[position]
         val textColor: Int = if (model.getIsSelected()){
-           R.color.primary
+            R.color.primary
         } else {
             R.color.accent
         }
@@ -32,7 +34,8 @@ class ExerciseStatusAdapter(private val exerciseList: ArrayList<ExerciseModel>):
         holder.tvItem.background =
             if(model.getIsSelected()){
                 AppCompatResources.getDrawable(c,
-                    R.drawable.item_circular_progress_accent_background)
+                    R.drawable.item_circular_progress_accent_background
+                )
             }else if (model.getIsCompleted()){
                 AppCompatResources.getDrawable(c, R.drawable.item_circular_primary_background)
             } else {

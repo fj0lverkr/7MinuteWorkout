@@ -1,4 +1,7 @@
-package com.nilsnahooy.a7minuteworkout
+package com.nilsnahooy.a7minuteworkout.data
+
+import com.nilsnahooy.a7minuteworkout.R
+import com.nilsnahooy.a7minuteworkout.utils.AppForContext
 
 enum class BmiResult(val classification: String, val advice: String) {
     UNDERWEIGHT("underweight", AppForContext.res.getString(R.string.adv_underweight)),
