@@ -118,7 +118,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/accent"
-        android:text="@string/title_bmi"
+        android:text="@string/label_bmi_button"
         android:textSize="@dimen/bmi_text"
         android:layout_marginTop="@dimen/margin_extra"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

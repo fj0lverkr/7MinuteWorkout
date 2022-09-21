@@ -45,4 +45,5 @@
     <string name="adv_undetermined">Please correct your input.</string>
     <string name="label_metric">Metric</string>
     <string name="label_imperial">Imperial</string>
+    <string name="label_bmi_button">calculate your BMI</string>
 </resources>
