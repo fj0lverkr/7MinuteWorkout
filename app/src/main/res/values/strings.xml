@@ -22,7 +22,8 @@
     <string name="slogan_finished">You cleared all exercises.</string>
     <string name="title_congrats">Congratulations!</string>
     <string name="title_confirm_back_navigation">Are you sure?</string>
-    <string name="confirm_back_navigation">This will stop your workout. You\'ve come this far, are you sure you want to quit?</string>
+    <string name="confirm_back_navigation">This will stop your workout. You\'ve come this far, are
+        you sure you want to quit?</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
     <string name="label_bmi">bmi</string>
@@ -31,4 +32,13 @@
     <string name="hint_height_in_cm">your height (cm)</string>
     <string name="hint_weight_in_kg">your weight (kg)</string>
     <string name="title_bmi_result">Your BMI</string>
+    <string name="adv_underweight">Being too skinny is just as unhealthy as being overweight.
+        Change your dietary habits for a regular, healthy calorie intake.</string>
+    <string name="adv_normal">Keep your current balance of diet and exercise.</string>
+    <string name="adv_overweight">You are overweight, change your diet to a more balanced, healthier
+        one and make sure to exercise regularly.</string>
+    <string name="adv_obese_1">Please contact your physician for advice.</string>
+    <string name="adv_obese_2">Please contact your physician for advice.</string>
+    <string name="adv_obese_3">Please contact your physician for advice.</string>
+    <string name="adv_undetermined">Please correct your input.</string>
 </resources>
