@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FinishedExercisesActivity"
-    android:background="@color/white">
+    tools:context=".FinishedExercisesActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_exercise"
