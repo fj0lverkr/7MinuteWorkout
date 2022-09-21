@@ -46,4 +46,7 @@
     <string name="label_metric">Metric</string>
     <string name="label_imperial">Imperial</string>
     <string name="label_bmi_button">calculate your BMI</string>
+    <string name="label_history">history</string>
+    <string name="title_history_activity">History</string>
+    <string name="cd_history">Icon of a calendar to symbolize history</string>
 </resources>

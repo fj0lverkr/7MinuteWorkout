@@ -25,6 +25,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, BmiActivity::class.java)
             startActivity(intent)
         }
+
+        b?.flHistoryButtonWrapper?.setOnClickListener {
+            val intent = Intent(this, HistoryActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroy() {
