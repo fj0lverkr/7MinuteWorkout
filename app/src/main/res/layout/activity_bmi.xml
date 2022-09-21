@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BmiActivity"
-    android:background="@color/white">
+    tools:context=".BmiActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_bmi"
@@ -15,7 +14,24 @@
         android:theme="@style/Theme.7MinuteWorkout.Toolbar"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@color/accent"
-        app:title="@string/title_bmi"/>
+        app:title="@string/title_bmi">
+        <TextView
+            android:id="@+id/tv_lbl_metric_imperial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/sw_metric_imperial"
+            android:text="@string/label_metric"
+            android:layout_marginHorizontal="@dimen/padding_global"
+            android:gravity="end"
+            android:layout_gravity="end"/>
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sw_metric_imperial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            app:useMaterialThemeColors="false"/>
+    </androidx.appcompat.widget.Toolbar>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_input_height"

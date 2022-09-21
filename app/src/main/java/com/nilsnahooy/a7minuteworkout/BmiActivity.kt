@@ -3,6 +3,8 @@ package com.nilsnahooy.a7minuteworkout
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.children
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityBmiBinding
 import java.math.BigDecimal
@@ -14,6 +16,7 @@ class BmiActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         b = ActivityBmiBinding.inflate(layoutInflater)
         setContentView(b?.root)
 
@@ -24,6 +27,13 @@ class BmiActivity : AppCompatActivity() {
 
         b?.tbBmi?.setNavigationOnClickListener {
             finish()
+        }
+
+        b?.swMetricImperial?.isChecked = isMetric
+        setMetricOrImperial()
+
+        b?.swMetricImperial?.setOnClickListener {
+           setMetricOrImperial()
         }
 
         resetTextViewsVisibility(false)
@@ -45,6 +55,34 @@ class BmiActivity : AppCompatActivity() {
                 View.INVISIBLE
             }
         }
+    }
+
+    private fun setMetricOrImperial(){
+        isMetric = b?.swMetricImperial?.isChecked == true
+        b?.tvLblMetricImperial?.text =
+            if(isMetric){
+                getString(R.string.label_metric)
+            }else{
+                getString(R.string.label_imperial)
+            }
+        b?.tilInputHeight?.hint =
+            if(isMetric){
+                getString(R.string.hint_height_in_cm)
+            }else{
+                getString(R.string.hint_height_in_in)
+            }
+        b?.tilInputWeight?.hint =
+            if (isMetric){
+                getString(R.string.hint_weight_in_kg)
+            }else{
+                getString(R.string.hint_weight_in_lb)
+            }
+        b?.tilInputWeight?.startIconDrawable =
+            if (isMetric){
+                AppCompatResources.getDrawable(this, R.drawable.ic_weight_kilogram)
+            }else{
+                AppCompatResources.getDrawable(this, R.drawable.ic_weight_pound)
+            }
     }
 
     private fun calculateBmi():BmiModel{
