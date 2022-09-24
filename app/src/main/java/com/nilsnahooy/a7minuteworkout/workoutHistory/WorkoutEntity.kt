@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 data class WorkoutEntity(
     @PrimaryKey(autoGenerate = true)
     val id:Int = 0,
-    val skipped: Int = 0,
-    val startDateTime: String = "",
-    val endDateTime: String = "",
-    val isCompleted: Boolean = false
+    var skipped: Int = 0,
+    var startDateTime: String = "",
+    var endDateTime: String = "",
+    var isCompleted: Boolean = false
 )

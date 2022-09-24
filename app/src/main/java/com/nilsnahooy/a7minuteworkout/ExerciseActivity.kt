@@ -11,11 +11,17 @@ import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nilsnahooy.a7minuteworkout.data.Constants
 import com.nilsnahooy.a7minuteworkout.databinding.ActivityExerciseBinding
 import com.nilsnahooy.a7minuteworkout.databinding.DialogCustomBackConfirmationBinding
 import com.nilsnahooy.a7minuteworkout.utils.ExerciseStatusAdapter
+import com.nilsnahooy.a7minuteworkout.workoutHistory.WorkoutDao
+import com.nilsnahooy.a7minuteworkout.workoutHistory.WorkoutEntity
+import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
@@ -28,12 +34,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var tickPlayer: MediaPlayer? = null
     private var exerciseAdapter: ExerciseStatusAdapter? = null
 
+    private lateinit var workout: WorkoutEntity
+    private lateinit var historyDao: WorkoutDao
+
     private val exerciseList = Constants.defaultExerciseList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         b = ActivityExerciseBinding.inflate(layoutInflater)
+        historyDao = (application as WorkoutApp).db.workoutDao()
         setContentView(b?.root)
 
         setSupportActionBar(b?.tbExercise)
@@ -50,6 +60,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         b?.tbExercise?.setNavigationOnClickListener {
             confirmBackNavigation()
         }
+
+        val start = LocalDateTime.now().format(DateTimeFormatter
+            .ofPattern("dd-MM-yyyy HH:mm"))
+        workout = WorkoutEntity(startDateTime = start)
 
         //Setup MediaPlayers
         startStopPlayer = MediaPlayer.create(applicationContext, R.raw.ex_start)
@@ -70,7 +84,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         exerciseAdapter = ExerciseStatusAdapter(exerciseList)
         b?.rvProgress?.adapter = exerciseAdapter
     }
+
     private fun setupRestView() {
+
         if(activityTimer != null) {
             activityTimer?.cancel()
             activityProgress = -1
@@ -141,7 +157,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                     if(activityIndex < exerciseList.size-1) {
                         startExercise(activityIndex + 1, true)
                     } else {
-                       val intent = Intent(this@ExerciseActivity,
+                        workout.isCompleted = true
+                        storeWorkoutToHistory()
+                        val intent = Intent(this@ExerciseActivity,
                            FinishedExercisesActivity::class.java)
                         startActivity(intent)
                     }
@@ -181,9 +199,20 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             confirmDialog.dismiss()
         }
         dB.btnConfirmBackYes.setOnClickListener {
+            workout.isCompleted = false
+            storeWorkoutToHistory()
             finish()
         }
         confirmDialog.show()
+    }
+
+    private fun storeWorkoutToHistory(){
+        val end = LocalDateTime.now().format(DateTimeFormatter
+            .ofPattern("dd-MM-yyyy HH:mm"))
+        workout.endDateTime = end
+        lifecycleScope.launch {
+            historyDao.insert(workout)
+        }
     }
 
     override fun onDestroy() {
