@@ -14,7 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:src="@drawable/ic_baseline_check_24" />
+        tools:src="@drawable/ic_baseline_check_24"
+        android:contentDescription="@string/cd_workout_completed" />
     <TextView
         android:id="@+id/tv_item_start_label"
         android:layout_width="wrap_content"
@@ -67,6 +68,7 @@
         android:src="@drawable/ic_baseline_delete_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/cd_delete_workout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

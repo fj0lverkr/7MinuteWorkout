@@ -54,4 +54,6 @@
     <string name="label_start_colon">Start: </string>
     <string name="label_end_colon">End: </string>
     <string name="lbl_skipped_colon">Skipped: </string>
+    <string name="cd_workout_completed">Illustrates if the workout was completed or not</string>
+    <string name="cd_delete_workout">CLick to delete this workout from your history.</string>
 </resources>
