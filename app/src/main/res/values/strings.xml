@@ -56,4 +56,8 @@
     <string name="lbl_skipped_colon">Skipped: </string>
     <string name="cd_workout_completed">Illustrates if the workout was completed or not</string>
     <string name="cd_delete_workout">CLick to delete this workout from your history.</string>
+    <string name="toast_delete_confirmed">Workout deleted.</string>
+    <string name="lbl_no">No</string>
+    <string name="lbl_yes">Yes</string>
+    <string name="title_delete_record">Delete Record</string>
 </resources>
