@@ -49,4 +49,6 @@
     <string name="label_history">history</string>
     <string name="title_history_activity">History</string>
     <string name="cd_history">Icon of a calendar to symbolize history</string>
+    <string name="title_history">Exercise history</string>
+    <string name="lbl_no_items_history">No exercises in history...</string>
 </resources>
