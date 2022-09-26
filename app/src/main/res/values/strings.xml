@@ -60,4 +60,6 @@
     <string name="lbl_no">No</string>
     <string name="lbl_yes">Yes</string>
     <string name="title_delete_record">Delete Record</string>
+    <string name="tts_finished_workout">Congratulations of finishing your workout.</string>
+    <string name="cd_skip_this_exercise">Skip this exercise.</string>
 </resources>

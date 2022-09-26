@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
@@ -33,6 +34,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var startStopPlayer: MediaPlayer? = null
     private var tickPlayer: MediaPlayer? = null
     private var exerciseAdapter: ExerciseStatusAdapter? = null
+    private var currentExercise: Int = 0
 
     private lateinit var workout: WorkoutEntity
     private lateinit var historyDao: WorkoutDao
@@ -59,6 +61,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         })
         b?.tbExercise?.setNavigationOnClickListener {
             confirmBackNavigation()
+        }
+
+        b?.ivSkipButton?.setOnClickListener {
+            skipExercise(currentExercise)
         }
 
         val start = LocalDateTime.now().format(DateTimeFormatter
@@ -91,13 +97,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             activityTimer?.cancel()
             activityProgress = -1
         }
-        startExercise(0, true)
+        startExercise(currentExercise, true)
     }
 
     private fun startExercise(activityIndex: Int, isRest: Boolean) {
         val activity = exerciseList[activityIndex]
         val activityName = activity.getName()
         val activityImage = activity.getImageRes()
+        activityProgress = -1
 
         activity.setIsSelected(true)
         b?.rvProgress?.adapter?.notifyItemChanged(activityIndex)
@@ -112,6 +119,12 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             10000
         }else {
             activity.getDuration()
+        }
+
+        b?.ivSkipButton?.visibility = if(isRest){
+            View.GONE
+        } else {
+            View.VISIBLE
         }
 
         b?.tvSlogan?.text = slogan
@@ -152,13 +165,15 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 if (isRest) {
                     startExercise(activityIndex, false)
                 } else {
+                    currentExercise = activityIndex + 1
                     if (startStopPlayer?.isPlaying == true) startStopPlayer?.stop()
                     startStopPlayer?.start()
                     if(activityIndex < exerciseList.size-1) {
-                        startExercise(activityIndex + 1, true)
+                        startExercise(currentExercise, true)
                     } else {
                         workout.isCompleted = true
                         storeWorkoutToHistory()
+                        speakOut(getString(R.string.tts_finished_workout))
                         val intent = Intent(this@ExerciseActivity,
                            FinishedExercisesActivity::class.java)
                         startActivity(intent)
@@ -212,6 +227,27 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         workout.endDateTime = end
         lifecycleScope.launch {
             historyDao.insert(workout)
+        }
+    }
+
+    private fun skipExercise(activityIndex: Int){
+        val activity = exerciseList[activityIndex]
+        currentExercise += 1
+        workout.skipped += 1
+
+        activityTimer?.cancel()
+        activity.setIsSelected(false)
+        activity.setIsCompleted(true)
+        b?.rvProgress?.adapter?.notifyItemChanged(activityIndex)
+        if(currentExercise < exerciseList.size) {
+            startExercise(currentExercise, true)
+        } else {
+            workout.isCompleted = true
+            storeWorkoutToHistory()
+            speakOut(getString(R.string.tts_finished_workout))
+            val intent = Intent(this@ExerciseActivity,
+                FinishedExercisesActivity::class.java)
+            startActivity(intent)
         }
     }
 

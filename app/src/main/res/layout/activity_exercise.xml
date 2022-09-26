@@ -83,6 +83,18 @@
         </LinearLayout>
     </FrameLayout>
 
+    <ImageView
+        android:id="@+id/iv_skip_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_skip_next"
+        app:layout_constraintTop_toBottomOf="@id/fl_timer_wrapper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/cd_skip_this_exercise"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
